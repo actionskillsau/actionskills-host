@@ -1,0 +1,79 @@
+/* ActionSkills Host – Dashboard panel */
+
+.actionskills-host-panel {
+	margin: 20px 20px 10px 0;
+	background: #fff;
+	border: 1px solid #c3c4c7;
+	box-shadow: 0 1px 1px rgba(0, 0, 0, .04);
+	font-size: 14px;
+}
+
+.actionskills-host-header {
+	padding: 24px 16px 16px;
+	background: #0073aa;
+	color: #fff;
+	text-align: center;
+}
+
+.actionskills-host-header img {
+	max-width: 100%;
+	height: auto;
+}
+
+.actionskills-host-header p {
+	margin: 8px 0 0;
+	font-size: 15px;
+}
+
+.actionskills-host-tabs {
+	display: flex;
+	flex-wrap: wrap;
+	background: #0073aa;
+	border-top: 1px solid rgba(255, 255, 255, .2);
+}
+
+.actionskills-host-tabs button {
+	padding: 14px 16px;
+	border: 0;
+	background: transparent;
+	color: #fff;
+	font-size: 14px;
+	cursor: pointer;
+}
+
+.actionskills-host-tabs button:hover {
+	background: rgba(0, 0, 0, .2);
+}
+
+.actionskills-host-tabs button[aria-selected="true"] {
+	background: #616161;
+}
+
+.actionskills-host-tabs button:focus-visible {
+	outline: 2px solid #fff;
+	outline-offset: -4px;
+}
+
+.actionskills-host-body {
+	padding: 8px 24px 24px;
+	max-width: 900px;
+}
+
+.actionskills-host-body h2 {
+	margin: 1em 0 .5em;
+	font-size: 1.4em;
+}
+
+.actionskills-host-body h3 {
+	margin: 1.2em 0 .4em;
+}
+
+.actionskills-host-body ul {
+	list-style: disc;
+	margin-left: 2em;
+}
+
+.actionskills-host-body ul ul {
+	margin-top: .5em;
+	list-style: circle;
+}
