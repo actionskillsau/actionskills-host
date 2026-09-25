@@ -3,7 +3,7 @@
  * Plugin Name:       ActionSkills Host
  * Plugin URI:        https://actionskills.au/host/
  * Description:       Community Hosting
- * Version:           1.3.0
+ * Version:           1.4.0
  * Requires at least: 6.0
  * Requires PHP:      7.4
  * Author:            ActionSkills
@@ -16,7 +16,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'ACTIONSKILLS_HOST_VERSION', '1.3.0' );
+define( 'ACTIONSKILLS_HOST_VERSION', '1.4.0' );
 define( 'ACTIONSKILLS_HOST_DIR', plugin_dir_path( __FILE__ ) );
 define( 'ACTIONSKILLS_HOST_URL', plugin_dir_url( __FILE__ ) );
 
