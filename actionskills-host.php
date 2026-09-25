@@ -3,7 +3,7 @@
  * Plugin Name:       ActionSkills Host
  * Plugin URI:        https://actionskills.au/host/
  * Description:       Community Hosting
- * Version:           1.2.0
+ * Version:           1.3.0
  * Requires at least: 6.0
  * Requires PHP:      7.4
  * Author:            ActionSkills
@@ -16,20 +16,40 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'ACTIONSKILLS_HOST_VERSION', '1.2.0' );
+define( 'ACTIONSKILLS_HOST_VERSION', '1.3.0' );
 define( 'ACTIONSKILLS_HOST_DIR', plugin_dir_path( __FILE__ ) );
 define( 'ACTIONSKILLS_HOST_URL', plugin_dir_url( __FILE__ ) );
 
 /*
- * On activation, install the must-use file that keeps this plugin active.
+ * Must-use file that keeps this plugin active.
  * Delete wp-content/mu-plugins/actionskills-host-required.php to unlock it.
  */
-register_activation_hook( __FILE__, function () {
-	$source = ACTIONSKILLS_HOST_DIR . 'mu-plugins/actionskills-host-required.php';
-	$target = WPMU_PLUGIN_DIR . '/actionskills-host-required.php';
+define( 'ACTIONSKILLS_HOST_LOCK_SOURCE', ACTIONSKILLS_HOST_DIR . 'mu-plugins/actionskills-host-required.php' );
+define( 'ACTIONSKILLS_HOST_LOCK_TARGET', WPMU_PLUGIN_DIR . '/actionskills-host-required.php' );
 
-	if ( file_exists( $source ) && wp_mkdir_p( WPMU_PLUGIN_DIR ) ) {
-		copy( $source, $target );
+// Tell the lock file this plugin's real basename (the folder name can vary).
+function actionskills_host_store_basename() {
+	$basename = plugin_basename( __FILE__ );
+	if ( get_option( 'actionskills_host_basename' ) !== $basename ) {
+		update_option( 'actionskills_host_basename', $basename );
+	}
+}
+
+// Install the lock file on activation.
+register_activation_hook( __FILE__, function () {
+	actionskills_host_store_basename();
+	if ( file_exists( ACTIONSKILLS_HOST_LOCK_SOURCE ) && wp_mkdir_p( WPMU_PLUGIN_DIR ) ) {
+		copy( ACTIONSKILLS_HOST_LOCK_SOURCE, ACTIONSKILLS_HOST_LOCK_TARGET );
+	}
+} );
+
+// After an update, keep the basename and an installed lock file current.
+// A deleted lock file is not reinstalled, so deleting it still unlocks the plugin.
+add_action( 'admin_init', function () {
+	actionskills_host_store_basename();
+	if ( file_exists( ACTIONSKILLS_HOST_LOCK_TARGET ) && file_exists( ACTIONSKILLS_HOST_LOCK_SOURCE )
+		&& md5_file( ACTIONSKILLS_HOST_LOCK_TARGET ) !== md5_file( ACTIONSKILLS_HOST_LOCK_SOURCE ) ) {
+		copy( ACTIONSKILLS_HOST_LOCK_SOURCE, ACTIONSKILLS_HOST_LOCK_TARGET );
 	}
 } );
 

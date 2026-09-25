@@ -14,7 +14,7 @@ assets/actionskills.png
 
 ## Required (can't be deactivated)
 
-On activation the plugin copies `mu-plugins/actionskills-host-required.php` to `wp-content/mu-plugins/`. That file keeps the plugin active and removes its Deactivate/Delete links, while normal GitHub updates still work. To unlock, delete that file from `wp-content/mu-plugins/`.
+On activation the plugin copies `mu-plugins/actionskills-host-required.php` to `wp-content/mu-plugins/`. That file keeps the plugin active and removes its Deactivate/Delete links, while normal GitHub updates still work. The plugin saves its real folder name in the `actionskills_host_basename` option, so the lock works whatever the folder is called. Updates refresh an installed lock file automatically. To unlock, delete that file from `wp-content/mu-plugins/`. It is not reinstalled until the next activation.
 
 To add a tab, add an entry to `$tabs` in `templates/panel.php` and a matching `<div role="tabpanel" id="actionskills-tab-{id}" … hidden>` block.
 
