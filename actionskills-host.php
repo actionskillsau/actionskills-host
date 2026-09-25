@@ -1,9 +1,9 @@
 <?php
 /**
  * Plugin Name:       ActionSkills Host
- * Plugin URI:        https://actionskills.au
- * Description:       
- * Version:           1.1.0
+ * Plugin URI:        https://actionskills.au/host/
+ * Description:       Community Hosting
+ * Version:           1.2.0
  * Requires at least: 6.0
  * Requires PHP:      7.4
  * Author:            ActionSkills
@@ -16,9 +16,22 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'ACTIONSKILLS_HOST_VERSION', '1.1.0' );
+define( 'ACTIONSKILLS_HOST_VERSION', '1.2.0' );
 define( 'ACTIONSKILLS_HOST_DIR', plugin_dir_path( __FILE__ ) );
 define( 'ACTIONSKILLS_HOST_URL', plugin_dir_url( __FILE__ ) );
+
+/*
+ * On activation, install the must-use file that keeps this plugin active.
+ * Delete wp-content/mu-plugins/actionskills-host-required.php to unlock it.
+ */
+register_activation_hook( __FILE__, function () {
+	$source = ACTIONSKILLS_HOST_DIR . 'mu-plugins/actionskills-host-required.php';
+	$target = WPMU_PLUGIN_DIR . '/actionskills-host-required.php';
+
+	if ( file_exists( $source ) && wp_mkdir_p( WPMU_PLUGIN_DIR ) ) {
+		copy( $source, $target );
+	}
+} );
 
 /*
  * Updates from GitHub releases via Plugin Update Checker.

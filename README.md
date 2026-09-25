@@ -12,6 +12,10 @@ assets/admin.js       ← accessible tabs (click, arrow keys, Home/End)
 assets/actionskills.png
 ```
 
+## Required (can't be deactivated)
+
+On activation the plugin copies `mu-plugins/actionskills-host-required.php` to `wp-content/mu-plugins/`. That file keeps the plugin active and removes its Deactivate/Delete links, while normal GitHub updates still work. To unlock, delete that file from `wp-content/mu-plugins/`.
+
 To add a tab, add an entry to `$tabs` in `templates/panel.php` and a matching `<div role="tabpanel" id="actionskills-tab-{id}" … hidden>` block.
 
 ## Updates via GitHub (free)
